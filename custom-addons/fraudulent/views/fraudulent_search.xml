@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+        <!-- bug list view -->
+        <record model="ir.ui.view" id="fraudulent.fraudulent_search">
+            <field name="name">fraudulent 搜索</field>
+	    <field name="model">fraudulent.fraudulent</field>
+            <field name="arch" type="xml">
+              <search>
+                <field name="name" />
+                <field name="is_closed" />
+                <field name="user_id" />
+              </search>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
+

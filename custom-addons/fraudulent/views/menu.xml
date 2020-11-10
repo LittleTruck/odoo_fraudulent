@@ -1,0 +1,102 @@
+<odoo>
+  <data>
+  
+    <act_window id="action_fraudulent"
+        name="fraudulent"
+        res_model="fraudulent.fraudulent"
+        view_mode="tree,form"
+        />
+
+    <record model="ir.actions.act_window" id="fraudulent.fraudulent_action_window">
+      <field name="name">單筆輸入</field>
+      <field name="res_model">fraudulent.fraudulent</field>
+      <field name="view_mode">form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="fraudulent.fraudulent_action_window_1">
+      <field name="name">訂單列表</field>
+      <field name="res_model">fraudulent.fraudulent</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('api_call','=', False)]</field>
+    </record>
+
+     <record model="ir.actions.act_window" id="fraudulent.fraudulent_action_window_2">
+      <field name="name">API呼叫列表</field>
+      <field name="res_model">fraudulent.fraudulent</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('api_call','=', True)]</field>
+    </record>
+
+
+    <!-- <record id="action_open_google" model="ir.actions.act_url">
+      <field name="name">開啟谷歌</field>
+      <field name="target">new</field>
+      <field name="url">https://google.com</field>
+    </record> -->
+
+
+    <menuitem name="盜刷預測系統" id="fraudulent.menu_root"/>
+
+
+    <menuitem name="訂單建立" id="fraudulent.menu_1" parent="fraudulent.menu_root"/>
+    <menuitem name="單筆輸入" id="fraudulent.menu_1_list_1" parent="fraudulent.menu_1" action="fraudulent.fraudulent_action_window" />
+
+    <menuitem name="訂單資料分析" id="fraudulent.menu_2" parent="fraudulent.menu_root"/>
+    <menuitem name="訂單列表" id="fraudulent.menu_2_list" parent="fraudulent.menu_2" action="fraudulent.fraudulent_action_window_1" />
+
+    <menuitem name="API資料管理" id="fraudulent.menu_3" parent="fraudulent.menu_root"/>
+    <menuitem name="API呼叫列表" id="fraudulent.menu_3_list" parent="fraudulent.menu_3" action="fraudulent.fraudulent_action_window_2" />
+
+
+    <!-- <menuitem name="111" id="fraudulent.menu_4" parent="fraudulent.menu_root"/>
+    <menuitem name="222" id="fraudulent.menu_4_list" parent="fraudulent.menu_4" action="action_open_google" /> -->
+    <!-- <menuitem name="Server to list" id="fraudulent" parent="fraudulent.menu_2"
+              action="fraudulent.action_server"/>
+
+    <record model="ir.actions.server" id="fraudulent.action_server">
+      <field name="name">fraudulent server</field>
+      <field name="model_id" ref="model_fraudulent_fraudulent"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record> -->
+
+<!-- 
+    <record model="ir.actions.act_window" id="fraudulent.follower_action_window">
+      <field name="name">follower window</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">form</field>
+    </record>
+
+    <menuitem name="關注者管理" id="fraudulent.menu_2" parent="fraudulent.menu_root" />
+    <menuitem name="關注者列表" id="fraudulent.menu_2_list" parent="fraudulent.menu_2" action="fraudulent.follower_action_window" />
+    <menuitem name="1111" id="fraudulent.fraudulent_form" parent="fraudulent.menu_2" action="fraudulent.follower_action_window" />
+ -->
+
+<!-- 
+    <record model="ir.actions.act_window" id="fraudulent.ttt_action_window">
+      <field name="name">follower window</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="fraudulent.ccc_action_window">
+      <field name="name">follower window</field>
+      <field name="res_model">fraudulent.fraudulent</field>
+      <field name="view_mode">form</field>
+    </record>
+
+
+    <menuitem name="test" id="fraudulent.menu_3" parent="fraudulent.menu_root" />
+
+    <menuitem name="ccc" id="fraudulent.menu_3_list" parent="fraudulent.menu_3" action="fraudulent.ccc_action_window" />
+    <menuitem name="ddd" id="fraudulent.menu_3_list_1" parent="fraudulent.menu_3" action="fraudulent.ccc_action_window" /> -->
+
+
+  </data>
+</odoo> 

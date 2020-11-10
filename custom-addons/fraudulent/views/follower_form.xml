@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+        <!-- follower form view -->
+        <record model="ir.ui.view" id="fraudulent.follower_form" >
+            <field name="name">關注者表單</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" 
+                   ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="fraudulent_ids" />
+                </field>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
+

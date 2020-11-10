@@ -1,0 +1,16 @@
+
+<odoo>
+    <record id="view_form_fraudulent" model="ir.ui.view">
+        <field name="name">Fraudulent Form</field>
+        <field name="model">fraudulent.fraudulent</field>
+        <field name="arch" type="xml">
+            <form string="fraudulent system">
+                <group>
+                    <field name="name"/>
+                    <field name="is_done"/>
+                    <field name="active" readonly="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

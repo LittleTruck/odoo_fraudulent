@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="fraudulent.api_list">
+		        <field name="name">API呼叫列表</field>
+            <field name="model">fraudulent.fraudulent</field>
+            <field name="arch" type="xml">
+              <tree>
+                <field name="name" />
+                <field name="order_id" />
+                <field name="order_amount" />
+                <field name="predict_result" />
+                <field name="is_fraudulent" />
+                <field name="write_date" attrs="{'invisible':[('api_call', '!=', False)]}" />
+                <field name="api_call" />
+                <field name="api_call_time" attrs="{'invisible':[('api_call', '!=', True)]}" />
+              </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
+

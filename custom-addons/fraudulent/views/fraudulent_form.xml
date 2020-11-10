@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="fraudulent.fraudulent_form">
+            <field name="name">fraudulent 表單</field>
+            <field name="model">fraudulent.fraudulent</field>
+            <field name="arch" type="xml">
+              <form>
+                <header>
+                    <button actions="print_instance" name="do_close" type="object" string="關閉 fraudulent " />
+                </header>
+                <sheet>
+                    <group name="group_top" col="2">
+                        <group name="group_left">
+                            <field name="name" />
+                            <field name="user_id" />
+                            <field name="is_closed" />
+                        </group>
+                        <group name="group_right">
+                            <field name="close_reason" />
+                            <!-- <field name="follower_id" /> -->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="詳細內容">
+                            <field name="detail" />
+                        </page>
+                    </notebook>
+                </sheet>
+              </form>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
