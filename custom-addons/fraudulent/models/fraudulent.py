@@ -43,6 +43,8 @@ class fraudulent(models.Model):
     product_quantity = fields.Integer('訂購商品張數',required=True)
     buyer_nationality = fields.Char('訂購人國籍',required=True)
     cart_id = fields.Char('購物車編號',required=True)
+    order_comment = fields.Boolean('是否填寫評論',required=True)
+    order_remark = fields.Boolean('訂單備註',required=True)
 
     buyer_id = fields.Char('會員代號',required=True)
 
@@ -104,8 +106,8 @@ class fraudulent(models.Model):
                 ],
                 columns=
                     [
-                        '訂購商品Tag',
-                        '訂購商品編號'
+                        'tag_cd',
+                        'prod_oid'
                     ]
             )
             data = pd.DataFrame(
@@ -128,7 +130,10 @@ class fraudulent(models.Model):
 
                         str(fraudulent.member_registry_time ),
 
-                        str(fraudulent.prod_oid )
+                        str(fraudulent.prod_oid ),
+
+                        str(fraudulent.order_comment ),
+                        str(fraudulent.order_remark )
                     ]
                 ],
                 columns=
@@ -150,7 +155,10 @@ class fraudulent(models.Model):
 
                         '註冊時間',
 
-                        '訂購商品編號'
+                        '訂購商品編號',
+                        
+                        '是否填寫評論',
+                        '訂單備註'
                     ]
             )
 
@@ -168,6 +176,7 @@ class fraudulent(models.Model):
 
             ## 讀取 model
             xgboost_model = xgb.Booster(model_file="/home/vagrant/Desktop/test/xgboostnew")
+            
             ypred = xgboost_model.predict(dtest)
             fraudulent.predict_result=str(ypred).strip('[]')
 
@@ -242,7 +251,7 @@ def product_processing(product):
 
     for i in sorted(all_set):
         tmp = zeros.copy() 
-        for idx,data in enumerate(product['訂購商品Tag'].apply(lambda x:x.split(","))):
+        for idx,data in enumerate(product['tag_cd'].apply(lambda x:x.split(","))):
             if i in data:
                 tmp[idx] = 1
         tag_dict[i] = tmp
@@ -250,7 +259,7 @@ def product_processing(product):
     tag_dataframe = pd.DataFrame(tag_dict)
     ##
     product = pd.concat([product,tag_dataframe],axis=1)
-    product['訂購商品編號'] = product['訂購商品編號']
+    product['訂購商品編號'] = product['prod_oid']
   
     return product
 
@@ -334,12 +343,11 @@ def data_preprocessing(data):
     
     # 刪除變數名稱
     data = data.drop(axis=1, columns=['購物車編號', '訂單編號', '訂購人電話國碼',
-                                      '訂購人電話', '訂單成立日期', 
-                                      '訂購商品名稱', '訂購商品出發日','訂購人國籍','註冊時間'])
+                                      '訂購人電話', '訂單成立日期', '訂購商品編號',
+                                      '訂購商品名稱', '訂購商品出發日', '會員代號','訂購人國籍','prod_oid','tag_cd','註冊時間'])
     
     # 處理類別型變數
     data = pd.get_dummies(data)
-    
     
     return data
 

@@ -286,6 +286,8 @@ class Fraudulent(http.Controller):
             'product_quantity': input['訂購商品張數'],
             'buyer_nationality': input['訂購人國籍'],
             'cart_id': input['購物車編號'],
+            'order_comment': input['是否填寫評論'],
+            'order_remark': input['訂單備註'],
 
             'buyer_id': input['會員代號'],
 
@@ -293,6 +295,8 @@ class Fraudulent(http.Controller):
             'buyer_phone_plus': input['訂購人電話國碼'],
             'order_id': input['訂單編號'],
             'product_name': input['訂購商品名稱'],
+            
+            'is_fraudulent': input['實際是否為盜刷'],
 
             'predict_result': str(ypred).strip('[]'),
             'api_call': True,
@@ -424,7 +428,7 @@ def product_processing(product):
 def data_preprocessing(data):
     
     # 處理訂單日期
-    data["訂單日期"] = data['訂單成立日期'].apply(lambda x : str(x.split("-")[2].split(" ")[0]))
+    data["訂單日期"] = data['訂單成立日期'].apply(lambda x : str(x.split("/")[2].split(" ")[0]))
     
     # 處理訂單時間
     data['訂單時間'] = data['訂單成立日期'].apply(lambda x : str(int(x.split(" ")[1].split(":")[0])))
@@ -476,17 +480,17 @@ def data_preprocessing(data):
     data['high_coin'] = data['訂購人付款幣別'].apply(lambda x: 1 if x in high_coin else 0)
     
     # 處理訂購日與商品出發日相距多少天
-    data["相差多少天"] = [day.days for day in data['訂購商品出發日'].apply(lambda x :datetime.date(int(x.split('-')[0]),
-                                                     int(x.split('-')[1]),
-                                                     int(x.split('-')[2].split(' ')[0])))-data['訂單成立日期'].apply(lambda x :datetime.date(int(x.split('-')[0]),
-                                                     int(x.split('-')[1]),
-                                                     int(x.split('-')[2].split(' ')[0])))]
+    data["相差多少天"] = [day.days for day in data['訂購商品出發日'].apply(lambda x :datetime.date(int(x.split('/')[0]),
+                                                     int(x.split('/')[1]),
+                                                     int(x.split('/')[2].split(' ')[0])))-data['訂單成立日期'].apply(lambda x :datetime.date(int(x.split('/')[0]),
+                                                     int(x.split('/')[1]),
+                                                     int(x.split('/')[2].split(' ')[0])))]
     # 處理註冊日語訂購日相聚多少天
-    data['註冊日與訂購相差多少天'] = [day.days for day in data['訂單成立日期'].apply(lambda x :datetime.date(int(x.split('-')[0]),
-                                                     int(x.split('-')[1]),
-                                                     int(x.split('-')[2].split(' ')[0])))-data['註冊時間'].apply(lambda x :datetime.date(int(x.split('-')[0]),
-                                                     int(x.split('-')[1]),
-                                                     int(x.split('-')[2].split(' ')[0])))]
+    data['註冊日與訂購相差多少天'] = [day.days for day in data['訂單成立日期'].apply(lambda x :datetime.date(int(x.split('/')[0]),
+                                                     int(x.split('/')[1]),
+                                                     int(x.split('/')[2].split(' ')[0])))-data['註冊時間'].apply(lambda x :datetime.date(int(x.split('/')[0]),
+                                                     int(x.split('/')[1]),
+                                                     int(x.split('/')[2].split(' ')[0])))]
     
     # 處理消費總金額大於5000元
     high_money_risk = data.groupby('購物車編號').sum()[data.groupby('購物車編號').sum()['訂單總金額_新台幣']>5000]
