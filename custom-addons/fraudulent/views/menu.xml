@@ -27,16 +27,7 @@
       <field name="domain">[('api_call','=', True)]</field>
     </record>
 
-
-    <!-- <record id="action_open_google" model="ir.actions.act_url">
-      <field name="name">開啟谷歌</field>
-      <field name="target">new</field>
-      <field name="url">https://google.com</field>
-    </record> -->
-
-
     <menuitem name="盜刷預測系統" id="fraudulent.menu_root"/>
-
 
     <menuitem name="訂單建立" id="fraudulent.menu_1" parent="fraudulent.menu_root"/>
     <menuitem name="單筆輸入" id="fraudulent.menu_1_list_1" parent="fraudulent.menu_1" action="fraudulent.fraudulent_action_window" />
@@ -90,13 +81,6 @@
       <field name="res_model">fraudulent.fraudulent</field>
       <field name="view_mode">form</field>
     </record>
-
-
-    <menuitem name="test" id="fraudulent.menu_3" parent="fraudulent.menu_root" />
-
-    <menuitem name="ccc" id="fraudulent.menu_3_list" parent="fraudulent.menu_3" action="fraudulent.ccc_action_window" />
-    <menuitem name="ddd" id="fraudulent.menu_3_list_1" parent="fraudulent.menu_3" action="fraudulent.ccc_action_window" /> -->
-
 
   </data>
 </odoo> 

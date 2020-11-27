@@ -9,7 +9,6 @@
                 <field name="order_amount" />
                 <field name="predict_result" />
                 <field name="is_fraudulent" />
-                <!-- <field name="write_date" /> -->
               </tree>
             </field>
         </record>
